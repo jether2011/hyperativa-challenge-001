@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "30aa490f-90e6-4c28-8a8e-d62cc87d5a73",
+		"name": "Hyperativa Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "212884"
+	},
+	"item": [
+		{
+			"name": "[Account] Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"jether\",\n    \"password\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Account] Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"jether\",\n    \"password\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Cards] Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cardNumber\": \"1111222233334444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/card/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"card",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Cards] Create By Upload File",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/jether.rodrigues/Library/CloudStorage/Dropbox/My Mac (Jethers-MacBook-Pro.local)/Desktop/cards.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/card/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"card",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Cards] Get Cards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/card",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Cards] Get Card By Number",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/card/1111222233334444",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"card",
+						"1111222233334444"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

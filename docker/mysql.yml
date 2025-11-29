@@ -1,0 +1,11 @@
+services:
+  mysql:
+    container_name: 'hyperativa-mysql'
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=hyperativa_db'
+      - 'MYSQL_PASSWORD=hyperativa'
+      - 'MYSQL_ROOT_PASSWORD=hyperativa'
+      - 'MYSQL_USER=hyperativa'
+    ports:
+      - '3306:3306'
