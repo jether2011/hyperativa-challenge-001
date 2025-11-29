@@ -1,0 +1,99 @@
+---
+
+management:
+  endpoint:
+    health:
+      group:
+        complete:
+          show-details: always
+          show-components: always
+          include: ping,diskSpace,readinessState,livenessState
+        ready:
+          include: readinessState
+        live:
+          include: livenessState
+      probes:
+        enabled: true
+  observations:
+    http:
+      server:
+        requests:
+          name: ${management.metrics.web.server.request.metric-name}
+      client:
+        requests:
+          name: ${management.metrics.web.client.request.metric-name}
+  server:
+    port: ${server.port:9090}
+  endpoints:
+    web:
+      base-path: /
+      path-mapping:
+        health: healthcheck
+        prometheus: metrics
+      exposure:
+        include: health,info,metrics,prometheus,caches
+  prometheus:
+    metrics:
+      enabled:
+        all: true
+        jvm: true
+      export:
+        enabled: true
+      distribution:
+        percentiles:
+          http:
+            server:
+              requests: 0.5,0.75,0.95,0.99
+          jdbc:
+            connections:
+              acquire: 0.5,0.75,0.95,0.99
+              usage: 0.5,0.75,0.95,0.99
+              creation: 0.5,0.75,0.95,0.99
+          datasource:
+            pool:
+              usage: 0.5,0.75,0.95,0.99
+              max: 0.5,0.75,0.95,0.99
+              min: 0.5,0.75,0.95,0.99
+              idle: 0.5,0.75,0.95,0.99
+              active: 0.5,0.75,0.95,0.99
+              threadsAwaitingConnection: 0.5,0.75,0.95,0.99
+        slo:
+          hyperativa_circuitbreaker_calls: 5ms, 10ms, 25ms, 50ms, 100ms, 150ms, 250ms, 500ms, 1s, 3s, 5s, 10s
+          hyperativa_external_calls_duration: 5ms, 10ms, 25ms, 50ms, 100ms, 150ms, 250ms, 500ms, 1s, 3s, 5s, 10s
+          hyperativa_http_requests_duration: 5ms, 10ms, 25ms, 50ms, 100ms, 150ms, 250ms, 500ms, 1s, 3s, 5s, 10s
+          hyperativa_internal_ops_duration: 5ms, 10ms, 25ms, 50ms, 100ms, 150ms, 250ms, 500ms, 1s, 3s, 5s, 10s
+          hyperativa_business_cashin: 1, 10, 50, 100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 200000
+          hyperativa_business_cashout: 1, 10, 50, 100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 200000
+      histogram:
+        http:
+          server:
+            requests: true
+        jdbc:
+          connections:
+            acquire: true
+            usage: true
+            creation: true
+        datasource:
+          pool:
+            usage: true
+            max: true
+            min: true
+            idle: true
+            active: true
+            threadsAwaitingConnection: true
+  metrics:
+    resilience4j:
+      metric-name-prefix: hyperativa
+    web:
+      server:
+        request:
+          metric-name: hyperativa_http_requests_duration
+      client:
+        request:
+          metric-name: hyperativa_external_calls_duration
+    data:
+      repository:
+        metric-name: hyperativa_external_calls_duration
+    prometheus:
+      export:
+        enabled: true

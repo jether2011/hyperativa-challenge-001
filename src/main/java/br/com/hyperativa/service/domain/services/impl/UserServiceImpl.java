@@ -10,8 +10,14 @@ import br.com.hyperativa.service.resources.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Service implementation for managing user operations.
+ * Handles user creation, retrieval, and validation.
+ */
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
@@ -20,6 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserGetDTO createUser(final UserCreateDTO userCreate) {
         try {
             final User user = userRepository.save(

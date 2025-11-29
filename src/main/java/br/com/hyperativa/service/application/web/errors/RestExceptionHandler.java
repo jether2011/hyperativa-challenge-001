@@ -11,9 +11,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.slf4j.LoggerFactory.*;
+
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
-    private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(RestExceptionHandler.class);
+    private static final Logger LOG = getLogger(RestExceptionHandler.class);
     private static final String ERROR = "error";
     private static final String MESSAGE = "message";
 

@@ -10,10 +10,16 @@ import br.com.hyperativa.service.resources.repository.CardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service implementation for managing card operations.
+ * Handles creation, retrieval, and batch processing of card data.
+ */
 @Service
+@Transactional(readOnly = true)
 public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
 
@@ -22,6 +28,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public CardGetDTO createCard(final CardCreateDTO cardCreate) {
         try {
             final Card created = cardRepository.save(new Card().cardNumber(cardCreate.cardNumber()));
@@ -32,6 +39,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public void createCardsInBatch(List<CardCreateDTO> cardCreates) {
         try {
             final List<Card> cards = cardCreates.stream()
@@ -46,9 +54,30 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public CardGetDTO getCardByNumber(final String cardNumber) {
-        return cardRepository.findByCardNumber(cardNumber)
+        String hash = hashCardNumber(cardNumber);
+        return cardRepository.findByCardNumberHash(hash)
                 .map(card -> new CardGetDTO(card.getId(), card.getCardNumberIdentifier()))
                 .orElseThrow(() -> new NotFoundException("Card not found"));
+    }
+
+    /**
+     * Generates SHA-256 hash of card number for search purposes.
+     * Must match the hash generation in Card entity.
+     */
+    private String hashCardNumber(String cardNumber) {
+        try {
+            java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(cardNumber.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to generate hash", e);
+        }
     }
 
     @Override

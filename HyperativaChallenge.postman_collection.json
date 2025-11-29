@@ -8,12 +8,26 @@
 	"item": [
 		{
 			"name": "[Account] Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody)",
+							"pm.environment.set(\"token\", 'Bearer ' + data.token);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"jether\",\n    \"password\": \"pass\"\n}",
+					"raw": "{\n    \"username\": \"jether\",\n    \"password\": \"pass123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -43,7 +57,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"jether\",\n    \"password\": \"pass\"\n}",
+					"raw": "{\n    \"username\": \"jether\",\n    \"password\": \"pass123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,7 +87,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -109,7 +123,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -119,7 +133,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/Users/jether.rodrigues/Library/CloudStorage/Dropbox/My Mac (Jethers-MacBook-Pro.local)/Desktop/cards.txt"
+							"src": "/Users/jetherrodrigues/Desktop/DEV/interviews/coding/hyperativa-challenge-001/challenge-requirements/cards_upload_file.txt"
 						}
 					]
 				},
@@ -146,7 +160,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -172,7 +186,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJIeXBlcmF0aXZhIiwic3ViIjoiamV0aGVyIiwiaWF0IjoxNzQzNDMxNjE3LCJleHAiOjE3NDM1MTgwMTd9.rwF_pKv2WGigOvht0ec8-4e7RLcEMBx0PE1IXjJEhMLUGvtFJaIlo-idzHIr2m6gAVJTiItxN2ZUBF147JImNQ",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
