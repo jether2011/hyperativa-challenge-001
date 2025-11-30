@@ -109,7 +109,8 @@ class CardServiceImplTest {
         cardService.createCardsInBatch(cardCreateDTOs);
 
         // Then
-        verify(cardRepository, times(1)).saveAll(argThat(list -> list.size() == 2));
+        verify(cardRepository, times(1)).saveAll(argThat(list ->
+                list instanceof java.util.Collection && ((java.util.Collection<?>) list).size() == 2));
     }
 
     @Test

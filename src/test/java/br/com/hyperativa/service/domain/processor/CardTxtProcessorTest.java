@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,14 +31,14 @@ class CardTxtProcessorTest {
 
     @BeforeEach
     void setUp() {
-        when(fileUploadConfig.getMaxFileSize()).thenReturn(10485760L); // 10MB
+        lenient().when(fileUploadConfig.getMaxFileSize()).thenReturn(10485760L); // 10MB
         processor = new CardTxtProcessor(fileUploadConfig);
     }
 
     @Test
     @DisplayName("Should process valid file successfully")
     void shouldProcessValidFileSuccessfully() {
-        // Given
+        // Given - Format matches cards_upload_file.txt (padded to 51 chars)
         String fileContent = """
                 DESAFIO-HYPERATIVA           20180524LOTE0001000010
                 C1     4456897922969999
@@ -82,8 +83,8 @@ class CardTxtProcessorTest {
     @DisplayName("Should throw exception for file exceeding max size")
     void shouldThrowExceptionForFilExceedingMaxSize() {
         // Given
-        when(fileUploadConfig.getMaxFileSize()).thenReturn(100L);
-        String fileContent = "DESAFIO-HYPERATIVA           20180524LOTE0001000010\nC1     4456897922969999\nLOTE0001000001\n";
+        when(fileUploadConfig.getMaxFileSize()).thenReturn(10L); // Very small limit
+        String fileContent = "DESAFIO-HYPERATIVA           20180524LOTE0001000010\nC1     4456897922969999                          \nLOTE0001000001                                        \n";
         MultipartFile file = new MockMultipartFile(
                 "file",
                 "cards.txt",

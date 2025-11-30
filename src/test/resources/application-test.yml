@@ -15,10 +15,10 @@ spring:
 
 app:
   jwt:
-    secret: test-secret-key-for-jwt-token-generation-minimum-256-bits
+    secret: testSecretKeyForJwtTokenGenerationMinimum256BitsLongForHS256AlgorithmNeedsToBeVeryLongString
     expiration: 86400000
   encryption:
-    key: test-encryption-key-32-chars!!
+    key: testEncryptionKey32CharsLong!!
   file:
     upload:
       max-size: 10485760

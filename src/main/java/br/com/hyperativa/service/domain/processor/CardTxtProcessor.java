@@ -24,7 +24,7 @@ import java.util.List;
 public class CardTxtProcessor implements Processor<MultipartFile, List<CardCreateDTO>> {
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(CardTxtProcessor.class);
     private static final String HEADER_WORD = "LOTE";
-    private static final int LINE_LENGTH = 26;
+    private static final int MIN_LINE_LENGTH = 23; // "C1     " (7) + "1234567890123456" (16) = 23
     private static final int HEADER_LENGTH = 51;
     private static final String CONTENT_TYPE = "text/plain";
     private static final int CARD_NUMBER_START = 7;
@@ -69,7 +69,7 @@ public class CardTxtProcessor implements Processor<MultipartFile, List<CardCreat
                 }
 
                 // Skip lines that are too short
-                if (line.length() < LINE_LENGTH) {
+                if (line.length() < MIN_LINE_LENGTH) {
                     LOGGER.warn("Line {} is too short (length: {}), skipping", lineNumber, line.length());
                     continue;
                 }
