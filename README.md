@@ -1,6 +1,6 @@
 # Hyperativa Challenge - Card Management API
 
-A secure, production-ready REST API for credit/debit card number storage and retrieval, built with Spring Boot 3, featuring end-to-end encryption, comprehensive testing, and enterprise-grade security practices.
+A secure, environment-ready REST API for credit/debit card number storage and retrieval, built with Spring Boot 3, featuring end-to-end encryption, comprehensive testing, and enterprise-grade security practices.
 
 ## Table of Contents
 - [Key Improvements](#key-improvements)
@@ -10,9 +10,6 @@ A secure, production-ready REST API for credit/debit card number storage and ret
 - [Quick Start](#quick-start)
 - [API Documentation](#api-documentation)
 - [Testing](#testing)
-- [Project Structure](#project-structure)
-- [Comparison with README.md](#comparison-with-readmemd)
-
 ---
 
 ## Key Improvements
@@ -45,7 +42,7 @@ This implementation goes beyond the basic requirements with the following enhanc
 - **Global Exception Handling**: Centralized error handling with meaningful error messages
 - **Logging Aspect**: AOP-based request/response logging for all REST endpoints
 
-### Production Readiness
+### Environment Readiness
 - **Environment Configuration**: Separate configurations for dev/test/prod
 - **Database Migrations**: Flyway for version-controlled schema changes
 - **Connection Pooling**: Optimized HikariCP configuration
@@ -325,74 +322,6 @@ Tests use H2 in-memory database for isolation and speed. Configuration in `src/t
 
 ---
 
-## Project Structure
-
-```
-src/
-├── main/
-│   ├── java/br/com/hyperativa/service/
-│   │   ├── application/
-│   │   │   ├── config/           # Configuration classes
-│   │   │   │   ├── security/     # JWT, SecurityConfig
-│   │   │   │   ├── aspect/       # Logging AOP
-│   │   │   │   ├── OpenApiConfig.java
-│   │   │   │   ├── EncryptionConfig.java
-│   │   │   │   └── CardNumberEncryptor.java
-│   │   │   ├── util/             # Encryption utilities
-│   │   │   └── web/
-│   │   │       ├── controller/   # REST endpoints
-│   │   │       └── errors/       # Exception handlers
-│   │   ├── domain/
-│   │   │   ├── entity/           # JPA entities + DTOs
-│   │   │   ├── exceptions/       # Custom exceptions
-│   │   │   ├── processor/        # File processors
-│   │   │   └── services/         # Business logic
-│   │   └── resources/
-│   │       └── repository/       # JPA repositories
-│   └── resources/
-│       ├── application.yml       # Main configuration
-│       └── db/migration/         # Flyway migrations
-└── test/
-    ├── java/                     # Test classes
-    └── resources/
-        └── application-test.yml  # Test configuration
-```
-
----
-
-## Comparison with README.md
-
-| Aspect | Original README.md | This Implementation (README_2.md) |
-|--------|-------------------|-----------------------------------|
-| **Security** | Mentions Spring Security + JWT | ✅ AES-256-GCM encryption at rest<br>✅ Comprehensive input validation<br>✅ Externalized secrets |
-| **Documentation** | Basic setup instructions | ✅ Interactive Swagger UI<br>✅ Detailed API examples<br>✅ Architecture diagrams<br>✅ JavaDoc comments |
-| **Testing** | "Not intended to be production-ready" | ✅ Comprehensive unit tests<br>✅ Integration tests<br>✅ H2 test database setup |
-| **Code Quality** | Mentions future improvements | ✅ @Transactional management<br>✅ Global exception handling<br>✅ Request/response logging<br>✅ File validation |
-| **Production Readiness** | Development-focused | ✅ Environment variables<br>✅ Database connection pooling<br>✅ Graceful shutdown<br>✅ HTTP/2 support |
-| **File Processing** | Basic implementation | ✅ File size validation<br>✅ Detailed error messages<br>✅ Line-by-line validation<br>✅ Statistics logging |
-| **Database** | MySQL with Flyway | ✅ Optimized indexes<br>✅ Encrypted storage<br>✅ Migration versioning |
-
-### What Was Improved
-
-#### Critical Security Issues Fixed
-1. **Card Numbers in Plain Text** → Now encrypted with AES-256-GCM
-2. **Weak Validation** → Added @Size, @NotBlank with proper messages
-3. **Missing Transaction Management** → Added @Transactional to service methods
-
-#### Code Quality Enhancements
-1. **No Tests** → 3 unit test classes + integration tests
-2. **No API Documentation** → Full OpenAPI/Swagger integration
-3. **Basic File Processing** → Robust validation with detailed logging
-4. **Generic Error Messages** → Specific, actionable error responses
-
-#### Production-Ready Features Added
-1. **Environment Configuration** → .env.example with all required variables
-2. **Test Configuration** → Separate test profile with H2 database
-3. **OpenAPI Documentation** → Interactive API explorer
-4. **Enhanced Logging** → AOP-based request/response logging
-
----
-
 ## Environment Variables Reference
 
 | Variable | Description | Example | Required |
@@ -425,8 +354,6 @@ src/
 ---
 
 ## Future Enhancements (Beyond Assessment Scope)
-
-The original README.md mentioned these as "Future Improvements". This implementation already includes many, but here are additional recommendations:
 
 1. **Role-Based Access Control (RBAC)**
    - Add `ROLE_USER`, `ROLE_ADMIN` authorities
@@ -483,24 +410,10 @@ Report will be available at: `build/reports/jacoco/test/html/index.html`
 
 ---
 
-## License
-
-This project is developed as part of a technical assessment for Hyperativa.
-
----
-
 ## Author
 
 **Challenge Submission**
 - Built with Spring Boot 3.4.4
 - Java 21
 - Follows PCI-DSS principles for card data security
-- Production-ready architecture with comprehensive testing
-
----
-
-## Acknowledgments
-
-- Spring Boot team for excellent framework
-- Hyperativa for the challenging assessment
-- Security best practices from OWASP and PCI-DSS guidelines
+- Environment-ready architecture with comprehensive testing
